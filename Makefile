@@ -1,8 +1,8 @@
 .PHONY: all install clean distclean check
 
 all:
-	(cd sdr/libraries/captivation.libhackrf/cpp && ./reconf; ./configure; make -j2)
-	(cd sdr/devices/captivation.HackRFOne/cpp && ./reconf; ./configure; make -j2)
+	(cd sdr/libraries/captivation.libhackrf/cpp && ./reconf; ./configure; make -j2; make install)
+	(cd sdr/devices/captivation.HackRFOne/cpp && ./reconf; ./configure; make -j2; make install)
 
 install:
 	(cd sdr/libraries/captivation.libhackrf/cpp && ./reconf; ./configure; make install -j2)
