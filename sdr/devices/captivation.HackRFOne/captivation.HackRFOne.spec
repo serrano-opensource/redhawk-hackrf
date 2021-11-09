@@ -20,15 +20,15 @@ License:        None
 Source0:        %{name}-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires:  redhawk-devel >= 2.0
-Requires:       redhawk >= 2.0
+BuildRequires:  redhawk-devel >= 2.2
+Requires:       redhawk >= 2.2
 
 BuildRequires:  captivation.libhackrf-devel
 Requires:       captivation.libhackrf
 
 # Interface requirements
-BuildRequires:  frontendInterfaces >= 2.2 bulkioInterfaces >= 2.0
-Requires:       frontendInterfaces >= 2.2 bulkioInterfaces >= 2.0
+BuildRequires:  frontendInterfaces >= 2.4 bulkioInterfaces >= 2.2
+Requires:       frontendInterfaces >= 2.4 bulkioInterfaces >= 2.2
 
 
 %description

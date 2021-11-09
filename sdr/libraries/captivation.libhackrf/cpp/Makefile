@@ -220,13 +220,13 @@ distuninstallcheck_listfiles = find . -type f -print
 am__distuninstallcheck_listfiles = $(distuninstallcheck_listfiles) \
   | sed 's|^\./|$(prefix)/|' | grep -v '$(infodir)/dir$$'
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing aclocal-1.13
+ACLOCAL = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing aclocal-1.13
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = ar
-AUTOCONF = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing autoconf
-AUTOHEADER = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing autoheader
-AUTOMAKE = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing automake-1.13
+AUTOCONF = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing autoconf
+AUTOHEADER = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing autoheader
+AUTOMAKE = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing automake-1.13
 AWK = gawk
 BOOST_CPPFLAGS = -pthread -I/usr/include
 BOOST_LDFLAGS = -L/usr/lib64
@@ -274,7 +274,7 @@ LN_S = ln -s
 LOG4CXX_CFLAGS =  
 LOG4CXX_LIBS = -llog4cxx  
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing makeinfo
+MAKEINFO = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
@@ -303,10 +303,10 @@ SHELL = /bin/sh
 STRIP = strip
 VERSION = 1.0.0
 WITH_LOG4CXX = yes
-abs_builddir = /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
-abs_srcdir = /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
-abs_top_builddir = /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
-abs_top_srcdir = /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
+abs_builddir = /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
+abs_srcdir = /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
+abs_top_builddir = /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
+abs_top_srcdir = /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp
 ac_ct_AR = ar
 ac_ct_CC = gcc
 ac_ct_CXX = g++
@@ -336,7 +336,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/daniel.barbalato/dev/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/install-sh
+install_sh = ${SHELL} /home/sscott/workspace/redhawk-hackrf/sdr/libraries/captivation.libhackrf/cpp/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -946,7 +946,7 @@ distclean-local:
 	rm -f Makefile.in
 	rm -f missing
 
-redhawk_HEADERS_auto ?= $(filter include/%,$(redhawk_SOURCES_auto))
+redhawk_HEADERS_auto ?= $(filter %.h,$(redhawk_SOURCES_auto))
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

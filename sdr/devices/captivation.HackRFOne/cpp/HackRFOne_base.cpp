@@ -40,15 +40,15 @@ HackRFOne_base::HackRFOne_base(char *devMgr_ior, char *id, char *lbl, char *sftw
 
 HackRFOne_base::~HackRFOne_base()
 {
-    delete RFInfo_in;
+    RFInfo_in->_remove_ref();
     RFInfo_in = 0;
-    delete DigitalTuner_in;
+    DigitalTuner_in->_remove_ref();
     DigitalTuner_in = 0;
-    delete dataOctetTX_in;
+    dataOctetTX_in->_remove_ref();
     dataOctetTX_in = 0;
-    delete dataOctet_out;
+    dataOctet_out->_remove_ref();
     dataOctet_out = 0;
-    delete RFInfoTX_out;
+    RFInfoTX_out->_remove_ref();
     RFInfoTX_out = 0;
 }
 
@@ -57,14 +57,19 @@ void HackRFOne_base::construct()
     loadProperties();
 
     RFInfo_in = new frontend::InRFInfoPort("RFInfo_in", this);
+    RFInfo_in->setLogger(this->_baseLog->getChildLogger("RFInfo_in", "ports"));
     addPort("RFInfo_in", RFInfo_in);
     DigitalTuner_in = new frontend::InDigitalTunerPort("DigitalTuner_in", this);
+    DigitalTuner_in->setLogger(this->_baseLog->getChildLogger("DigitalTuner_in", "ports"));
     addPort("DigitalTuner_in", DigitalTuner_in);
     dataOctetTX_in = new bulkio::InOctetPort("dataOctetTX_in");
+    dataOctetTX_in->setLogger(this->_baseLog->getChildLogger("dataOctetTX_in", "ports"));
     addPort("dataOctetTX_in", dataOctetTX_in);
     dataOctet_out = new bulkio::OutOctetPort("dataOctet_out");
+    dataOctet_out->setLogger(this->_baseLog->getChildLogger("dataOctet_out", "ports"));
     addPort("dataOctet_out", dataOctet_out);
     RFInfoTX_out = new frontend::OutRFInfoPort("RFInfoTX_out");
+    RFInfoTX_out->setLogger(this->_baseLog->getChildLogger("RFInfoTX_out", "ports"));
     addPort("RFInfoTX_out", RFInfoTX_out);
 
     this->addPropertyListener(connectionTable, this, &HackRFOne_base::connectionTableChanged);
@@ -121,34 +126,6 @@ void HackRFOne_base::loadProperties()
 
 }
 
-/* This sets the number of entries in the frontend_tuner_status struct sequence property
- * as well as the tuner_allocation_ids vector. Call this function during initialization
- */
-void HackRFOne_base::setNumChannels(size_t num)
-{
-    this->setNumChannels(num, "RX_DIGITIZER");
-}
-/* This sets the number of entries in the frontend_tuner_status struct sequence property
- * as well as the tuner_allocation_ids vector. Call this function during initialization
- */
-
-void HackRFOne_base::setNumChannels(size_t num, std::string tuner_type)
-{
-    frontend_tuner_status.clear();
-    frontend_tuner_status.resize(num);
-    tuner_allocation_ids.clear();
-    tuner_allocation_ids.resize(num);
-    for (std::vector<frontend_tuner_status_struct_struct>::iterator iter=frontend_tuner_status.begin(); iter!=frontend_tuner_status.end(); iter++) {
-        iter->enabled = false;
-        iter->tuner_type = tuner_type;
-    }
-}
-
-void HackRFOne_base::frontendTunerStatusChanged(const std::vector<frontend_tuner_status_struct_struct>* oldValue, const std::vector<frontend_tuner_status_struct_struct>* newValue)
-{
-    this->tuner_allocation_ids.resize(this->frontend_tuner_status.size());
-}
-
 CF::Properties* HackRFOne_base::getTunerStatus(const std::string& allocation_id)
 {
     CF::Properties* tmpVal = new CF::Properties();
@@ -161,6 +138,11 @@ CF::Properties* HackRFOne_base::getTunerStatus(const std::string& allocation_id)
 
     CF::Properties_var tmp = new CF::Properties(*tmpVal);
     return tmp._retn();
+}
+
+void HackRFOne_base::frontendTunerStatusChanged(const std::vector<frontend_tuner_status_struct_struct>* oldValue, const std::vector<frontend_tuner_status_struct_struct>* newValue)
+{
+    this->tuner_allocation_ids.resize(this->frontend_tuner_status.size());
 }
 
 void HackRFOne_base::assignListener(const std::string& listen_alloc_id, const std::string& allocation_id)
