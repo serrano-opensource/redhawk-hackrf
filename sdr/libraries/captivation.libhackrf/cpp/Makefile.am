@@ -3,6 +3,7 @@ AUTOMAKE_OPTIONS = subdir-objects
 
 lib_LTLIBRARIES = libhackrf.la
 
+libdir = $(prefix)/cpp/lib
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = captivation.libhackrf.pc
 
